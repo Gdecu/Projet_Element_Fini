@@ -1,5 +1,6 @@
 #include "fem.h"
 #include <math.h>
+#include "utils.h"
 
 #ifndef M_PI
 #define M_PI 3.14159265358979323846
@@ -12,9 +13,15 @@ double hermiteInterpolation(double d, double d_star, double h0, double h_star) {
 }
 
 double geoSize(double x, double y) {
+    //printf("geoSize called with x=%f, y=%f\n", x, y);
     femGeo* theGeometry = geoGetGeometry();
+    if (theGeometry == NULL) {
+        printf("geoSize: ERROR – geometry not initialized!\n");
+        return 1.0;  // Valeur par défaut sécurisée
+    }
 
     double h = theGeometry->h;
+    return h;
     double r_in = theGeometry->r_in;
     double r_out = theGeometry->r_out;
     double angle_max = theGeometry->angle / 2;
@@ -37,8 +44,14 @@ double geoSize(double x, double y) {
     double hIn = (dR_in < damWidth) ? hermiteInterpolation(dR_in, damWidth, h0, h) : h;
     double hOut = (dR_out < damWidth) ? hermiteInterpolation(dR_out, damWidth, h1, h) : h;
 
-    // Prendre la taille minimale requise
-    return fmin(h, fmin(hIn, hOut));
+    double finalSize = fmin(h, fmin(hIn, hOut));
+
+    if (finalSize <= 0.0) {
+        printf("geoSize: ERROR – invalid lc = %f at x=%f, y=%f\n", finalSize, x, y);
+        return 0.05;  // taille de repli minimale
+    }
+    
+    return h;
 }
 
 void geoMeshGenerate() {
@@ -303,4 +316,8 @@ double *femElasticityForces(femProblem *theProblem){
     return theProblem->residuals;
 }
 
+double fun(double x, double y) 
+{
+    return 1;
+}
 
