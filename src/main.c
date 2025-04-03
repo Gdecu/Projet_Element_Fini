@@ -71,7 +71,8 @@ double E   = 35e9;
 double nu  = 0.2;
 double rho = 2.3e3; 
 double g   = 9.81;
-double Force = rho * g * theGeometry->height * theGeometry->r_out * theGeometry->angle;
+//double Force = rho * g * theGeometry->height * theGeometry->r_out * theGeometry->angle;
+double Force = rho * g * theGeometry->height;
 printf(" ==== Force applied on the disk : %14.7e [N] \n",Force);
 femProblem* theProblem = femElasticityCreate(theGeometry,E,nu,rho,g,PLANAR_STRAIN);
 femElasticityAddBoundaryCondition(theProblem,"Left",DIRICHLET_X,0.0);
@@ -98,7 +99,7 @@ double area = femElasticityIntegrate(theProblem, fun);
 //
     
 femNodes *theNodes = theGeometry->theNodes;
-double deformationFactor = 1.5e1;
+double deformationFactor = 1.5e2;
 double *normDisplacement = malloc(theNodes->nNodes * sizeof(double));
 double *forcesX = malloc(theNodes->nNodes * sizeof(double));
 double *forcesY = malloc(theNodes->nNodes * sizeof(double));
