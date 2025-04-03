@@ -17,8 +17,8 @@ double fun(double x, double y)
 }
 
 
-int main(void)
-{  
+int main(int argc, char *argv[])
+{
     printf("\n\n    V : Mesh and size mesh field \n");
     printf("    D : Domains \n");
     printf("    N : Next domain highlighted\n");
@@ -33,11 +33,12 @@ int main(void)
     
     geoInitialize();
     femGeo* theGeometry = geoGetGeometry();
-    theGeometry->r_in = 2.0;
-    theGeometry->r_out = 2.5;
-    theGeometry->h = 0.1;
-    theGeometry->h_in = 0.025;
-    theGeometry->h_out = 0.5;
+    double factor = atoi(argv[1]);
+    theGeometry->r_in = 2.0 * factor;
+    theGeometry->r_out = 2.5 * factor;
+    theGeometry->h = 0.1 * factor;
+    theGeometry->h_in = 0.075 * factor;
+    theGeometry->h_out = 0.025 * factor;
     theGeometry->height = 50;
     theGeometry->angle = M_PI/2;
 
