@@ -41,6 +41,12 @@ int main(void)
     theGeometry->height = 50;
     theGeometry->angle = M_PI/2;
 
+    double* heigts = malloc(5*sizeof(double));
+    heigts[0] = 1;
+    heigts[1] = 10;
+    heigts[2] = 20;
+    heigts[3] = 30;
+    heigts[4] = 40;
    
     geoMeshGenerate();
     geoMeshImport();
