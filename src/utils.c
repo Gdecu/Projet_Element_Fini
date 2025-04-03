@@ -14,16 +14,31 @@ double hermiteInterpolation(double d, double d_star, double h0, double h_star) {
 double geoSize(double x, double y) {
     femGeo* theGeometry = geoGetGeometry();
 
-    double h = 0.1;
-    double r = 1;
-    // double h0 = theGeometry->hNotch;
-    // double d0 = theGeometry->dNotch;
+    double h = theGeometry->h;
+    double r_in = theGeometry->r_in;
+    double r_out = theGeometry->r_out;
+    double angle_max = theGeometry->angle / 2;
 
-    // double dDisk = sqrt(x * x + y * y) - r;
-    // double hDisk = (dDisk < d0) ? hermiteInterpolation(dDisk, d0, h0, h) : h;
+    double damWidth = r_out - r_in;
+    double h0 = theGeometry->h_in;
+    double h1 = theGeometry->h_out;
 
-    // return fmin(h, hDisk);
-    return h;
+
+    double r = sqrt( x * x + y * y);
+    double angle = atan2(y,x);
+    
+    double dR_in = r - r_in;
+    double dR_out = r_out - r;
+    //double dRight = fabs(r * sin(angle_max - angle));
+    //double dLeft = fabs(r * sin ( - angle_max + angle));
+
+
+    // Taille interpolée autour de l'encoche et du trou
+    double hIn = (dR_in < damWidth) ? hermiteInterpolation(dR_in, damWidth, h0, h) : h;
+    double hOut = (dR_out < damWidth) ? hermiteInterpolation(dR_out, damWidth, h1, h) : h;
+
+    // Prendre la taille minimale requise
+    return fmin(h, fmin(hIn, hOut));
 }
 
 void geoMeshGenerate() {

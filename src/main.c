@@ -33,9 +33,11 @@ int main(void)
     
     geoInitialize();
     femGeo* theGeometry = geoGetGeometry();
-    theGeometry->r_in = 2;
+    theGeometry->r_in = 2.0;
     theGeometry->r_out = 2.5;
     theGeometry->h = 0.1;
+    theGeometry->h_in = 0.025;
+    theGeometry->h_out = 0.5;
     theGeometry->angle = M_PI/2;
 
    
@@ -88,7 +90,7 @@ double area = femElasticityIntegrate(theProblem, fun);
 //
     
 femNodes *theNodes = theGeometry->theNodes;
-double deformationFactor = 1.5e1;
+double deformationFactor = 2e2;
 double *normDisplacement = malloc(theNodes->nNodes * sizeof(double));
 double *forcesX = malloc(theNodes->nNodes * sizeof(double));
 double *forcesY = malloc(theNodes->nNodes * sizeof(double));

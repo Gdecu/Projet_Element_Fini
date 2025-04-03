@@ -53,7 +53,7 @@ typedef struct {
 
 typedef struct {
     double r_in, r_out;
-    double h;
+    double h, h_in, h_out;
     double angle;
     femElementType elementType;
     double (*geoSize)(double x, double y);
