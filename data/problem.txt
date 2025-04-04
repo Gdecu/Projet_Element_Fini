@@ -1,0 +1,66 @@
+Analyser la déformation d'une section horizontale d'un barrage hydraulique sous l'effet de la pression hydrostatique de l'eau.
+Dans le cadre du projet du cours LEPL1100 éléments finis.
+Le maillage est généré à l'aide de GMSH et le problème est résolu avec la bibliothèque FEM.
+=======================================================================================
+Info    : Cannot bind existing OpenCASCADE surface 1 to second tag 2                                                                           
+Info    : Could not preserve tag of 2D object 2 (->1)
+Info    : Meshing 1D...
+Info    : [  0%] Meshing curve 6 (Circle)
+Info    : [ 30%] Meshing curve 7 (Line)
+Info    : [ 60%] Meshing curve 8 (Ellipse)
+Info    : [ 80%] Meshing curve 9 (Line)
+Info    : Done meshing 1D (Wall 0.00523169s, CPU 0.011701s)
+Info    : Meshing 2D...
+Info    : Meshing surface 1 (Plane, Frontal-Delaunay)
+Info    : Done meshing 2D (Wall 0.0313051s, CPU 0.051124s)
+Info    : 554 nodes 1110 elements
+Geo     : Importing 554 nodes 
+Geo     : Importing 127 edges 
+Geo     : Importing 979 triangles 
+Geo     : Importing 4 entities 
+Geo     : Entity 0 : 79 elements 
+Geo     : Entity 1 : 8 elements 
+Geo     : Entity 2 : 32 elements 
+Geo     : Entity 3 : 8 elements 
+Number of detected domains: 4
+ ==== Force applied on the disk :  1.2294750e+06 [N/m] 
+
+ ======================================================================================= 
+(xsi=+0.0,eta=+0.0) :  phi(0)=+1.0   dphidxsi(0)=-1.0   dphideta(0)=-1.0 
+(xsi=+0.0,eta=+0.0) :  phi(1)=+0.0   dphidxsi(1)=+1.0   dphideta(1)=+0.0 
+(xsi=+0.0,eta=+0.0) :  phi(2)=+0.0   dphidxsi(2)=+0.0   dphideta(2)=+1.0 
+ 
+(xsi=+1.0,eta=+0.0) :  phi(0)=+0.0   dphidxsi(0)=-1.0   dphideta(0)=-1.0 
+(xsi=+1.0,eta=+0.0) :  phi(1)=+1.0   dphidxsi(1)=+1.0   dphideta(1)=+0.0 
+(xsi=+1.0,eta=+0.0) :  phi(2)=+0.0   dphidxsi(2)=+0.0   dphideta(2)=+1.0 
+ 
+(xsi=+0.0,eta=+1.0) :  phi(0)=+0.0   dphidxsi(0)=-1.0   dphideta(0)=-1.0 
+(xsi=+0.0,eta=+1.0) :  phi(1)=+0.0   dphidxsi(1)=+1.0   dphideta(1)=+0.0 
+(xsi=+0.0,eta=+1.0) :  phi(2)=+1.0   dphidxsi(2)=+0.0   dphideta(2)=+1.0 
+ 
+(xsi=-1.0) :  phi(0)=+1.0   dphidxsi(0)=-0.5 
+(xsi=-1.0) :  phi(1)=+0.0   dphidxsi(1)=+0.5 
+ 
+(xsi=+1.0) :  phi(0)=+0.0   dphidxsi(0)=-0.5 
+(xsi=+1.0) :  phi(1)=+1.0   dphidxsi(1)=+0.5 
+ ======================================================================================= 
+
+ Linear elasticity problem 
+   Young modulus   E   =  3.5000000e+10 [N/m2]
+   Poisson's ratio nu  =  2.0000000e-01 [-]
+   Density         rho =  2.3000000e+03 [kg/m3]
+   Gravity         g   =  9.8100000e+00 [m/s2]
+   Planar strains formulation 
+   Boundary conditions : 
+                  Left : imposing  0.00e+00 as the horizontal displacement  
+                 Right : imposing  0.00e+00 as the horizontal displacement  
+                  Left : imposing  0.00e+00 as the vertical displacement  
+                 Right : imposing  0.00e+00 as the vertical displacement  
+            Outer Disk : imposing -1.23e+06 as the vertical force density 
+ ======================================================================================= 
+
+ ==== Minimum displacement          :  0.0000000e+00 [m] 
+ ==== Maximum displacement          :  1.4415984e-02 [m] 
+ ==== Global horizontal force       : -2.4091787e-07 [N] 
+ ==== Global vertical force         : -1.4563474e+08 [N] 
+ ==== Weight                        :  2.4933298e+07 [N] 

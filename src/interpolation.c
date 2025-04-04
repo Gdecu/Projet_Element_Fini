@@ -17,15 +17,18 @@
 
 void run_interpolation()
 {  
-    printf("\n\n    V : Mesh and size mesh field \n");
-    printf("    D : Domains \n");
-    printf("    N : Next domain highlighted\n");
+    /*
+    FILE *outputFile = fopen("../data/problem.txt", "w");
+    if (outputFile == NULL) {
+        perror("Erreur lors de l'ouverture du fichier problem.txt");
+        exit(EXIT_FAILURE);
+    }
+    freopen("../data/problem.txt", "w", stdout);
 
-
-
- 
-    //double Lx = 1.0;
-    //double Ly = 2.0;
+    fprintf(outputFile, "Analyser la déformation d'une section horizontale d'un barrage hydraulique sous l'effet de la pression hydrostatique de l'eau.\n");
+    fprintf(outputFile, "Dans le cadre du projet du cours LEPL1100 éléments finis.\n");
+    fprintf(outputFile, "Le maillage est généré à l'aide de GMSH et le problème est résolu avec la bibliothèque FEM.\n");
+    */
       
     int ierr;
     
@@ -103,8 +106,8 @@ for (int i=0; i<theNodes->nNodes; i++){
 
 double hMin = femMin(normDisplacement,theNodes->nNodes);  
 double hMax = femMax(normDisplacement,theNodes->nNodes);  
-printf(" ==== Minimum displacement          : %14.7e [m] \n",hMin);
-printf(" ==== Maximum displacement          : %14.7e [m] \n",hMax);
+printf(" ==== Minimum displacement          : %14.7e [m] \n", hMin);
+printf(" ==== Maximum displacement          : %14.7e [m] \n", hMax);
 
 //
 //  -5- Calcul de la force globaleresultante
@@ -114,8 +117,8 @@ double theGlobalForce[2] = {0, 0};
 for (int i=0; i<theProblem->geometry->theNodes->nNodes; i++) {
     theGlobalForce[0] += theForces[2*i+0];
     theGlobalForce[1] += theForces[2*i+1]; }
-printf(" ==== Global horizontal force       : %14.7e [N] \n",theGlobalForce[0]);
-printf(" ==== Global vertical force         : %14.7e [N] \n",theGlobalForce[1]);
+printf(" ==== Global horizontal force       : %14.7e [N] \n", theGlobalForce[0]);
+printf(" ==== Global vertical force         : %14.7e [N] \n", theGlobalForce[1]);
 printf(" ==== Weight                        : %14.7e [N] \n", area * rho * g);
 
 //
@@ -171,6 +174,11 @@ do {
          glfwWindowShouldClose(window) != 1 );
         
 // Check if the ESC key was pressed or the window was closed
+
+/*
+fclose(outputFile);
+freopen("/dev/tty", "w", stdout); // Restaure stdout vers le terminal
+*/
 
 free(normDisplacement);
 free(forcesX);
