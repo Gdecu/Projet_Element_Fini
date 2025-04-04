@@ -35,7 +35,7 @@ void run_interpolation()
     theGeometry->r_out = 2.5;
     theGeometry->h = 0.1;
     theGeometry->h_in = 0.5;
-    theGeometry->h_out = 0.025;
+    theGeometry->h_out = 0.05;
     theGeometry->height = 50;
     theGeometry->angle = M_PI/2;
    
@@ -61,8 +61,8 @@ double E   = 35e9;
 double nu  = 0.2;
 double rho = 2.3e3; 
 double g   = 9.81;
-double Force = rho * g * theGeometry->height * theGeometry->r_out * theGeometry->angle;
-printf(" ==== Force applied on the disk : %14.7e [N] \n",Force);
+double Force = rho * g * theGeometry->height;
+printf(" ==== Force applied on the disk : %14.7e [N/m] \n",Force);
 femProblem* theProblem = femElasticityCreate(theGeometry,E,nu,rho,g,PLANAR_STRAIN);
 femElasticityAddBoundaryCondition(theProblem,"Left",DIRICHLET_X,0.0);
 femElasticityAddBoundaryCondition(theProblem,"Right",DIRICHLET_X,0.0);
@@ -88,7 +88,7 @@ double area = femElasticityIntegrate(theProblem, fun);
 //
     
 femNodes *theNodes = theGeometry->theNodes;
-double deformationFactor = 1.5e1;
+double deformationFactor = 1.5e3;
 double *normDisplacement = malloc(theNodes->nNodes * sizeof(double));
 double *forcesX = malloc(theNodes->nNodes * sizeof(double));
 double *forcesY = malloc(theNodes->nNodes * sizeof(double));

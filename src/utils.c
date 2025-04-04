@@ -1,6 +1,7 @@
 #include "fem.h"
 #include <math.h>
 #include "utils.h"
+#include "flag.h"
 
 #ifndef M_PI
 #define M_PI 3.14159265358979323846
@@ -21,12 +22,18 @@ double geoSize(double x, double y) {
     }
 
     double h = theGeometry->h;
-    return h;
+
+    if (flag == 0) {
+        // Interpolation pour le maillage
+        return h;
+    }
+
+
     double r_in = theGeometry->r_in;
     double r_out = theGeometry->r_out;
     double angle_max = theGeometry->angle / 2;
 
-    double damWidth = r_out - r_in;
+    double damWidth = fabs(r_out - r_in);
     double h0 = theGeometry->h_in;
     double h1 = theGeometry->h_out;
 
@@ -34,8 +41,8 @@ double geoSize(double x, double y) {
     double r = sqrt( x * x + y * y);
     double angle = atan2(y,x);
     
-    double dR_in = r - r_in;
-    double dR_out = r_out - r;
+    double dR_in = fabs(r - r_in);
+    double dR_out = fabs(r_out - r);
     //double dRight = fabs(r * sin(angle_max - angle));
     //double dLeft = fabs(r * sin ( - angle_max + angle));
 
@@ -45,13 +52,8 @@ double geoSize(double x, double y) {
     double hOut = (dR_out < damWidth) ? hermiteInterpolation(dR_out, damWidth, h1, h) : h;
 
     double finalSize = fmin(h, fmin(hIn, hOut));
-
-    if (finalSize <= 0.0) {
-        printf("geoSize: ERROR – invalid lc = %f at x=%f, y=%f\n", finalSize, x, y);
-        return 0.05;  // taille de repli minimale
-    }
     
-    return h;
+    return finalSize;
 }
 
 void geoMeshGenerate() {

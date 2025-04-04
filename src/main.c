@@ -2,6 +2,9 @@
 #include <string.h>
 #include "animation.h"
 #include "interpolation.h"
+#include "flag.h"
+
+int flag = 0;
 
 int main(int argc, char *argv[]) {
     if (argc < 2) {
@@ -10,8 +13,10 @@ int main(int argc, char *argv[]) {
     }
 
     if (strcmp(argv[1], "interpolation") == 0) {
+        flag = 1;
         run_interpolation();
     } else if (strcmp(argv[1], "animation") == 0) {
+        flag = 0;
         run_animation();
     } else {
         printf("Argument inconnu : %s\n", argv[1]);
