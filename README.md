@@ -1,6 +1,6 @@
 ﻿# Projet LINMA1100 : Analyse de la déformation d'un barrage hydraulique
 
-Ce projet, réalisé par **Jean DE WALQUE** et **Gaston DE CUMONT**, vise à analyser la déformation d'une section horizontale d'un barrage hydraulique sous l'effet de la force hydrostatique de l'eau.
+Ce projet, réalisé par **Jean DE WALQUE** et **Gaston DE CUMONT**, vise à analyser la déformation d'une section horizontale d'un barrage hydraulique sous l'effet de la pression hydrostatique de l'eau.
 
 ## Structure du Projet
 
