@@ -103,7 +103,7 @@
  
         // Écriture du maillage dans un fichier
         char filename[100];
-        sprintf(filename, "../data/mesh_%d.txt", i);
+        sprintf(filename, "../data/anim/mesh_%d.txt", i);
         geoMeshWrite(filename);
  
         // Création du problème FEM
