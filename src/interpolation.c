@@ -61,7 +61,7 @@ double E   = 35e9;
 double nu  = 0.2;
 double rho = 2.3e3; 
 double g   = 9.81;
-double Force = rho * g * theGeometry->height;
+double Force = rho * g * theGeometry->height + 101325; // 101325 Pa = 1 atm
 printf(" ==== Force applied on the disk : %14.7e [N/m] \n",Force);
 femProblem* theProblem = femElasticityCreate(theGeometry,E,nu,rho,g,PLANAR_STRAIN);
 femElasticityAddBoundaryCondition(theProblem,"Left",DIRICHLET_X,0.0);

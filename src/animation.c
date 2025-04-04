@@ -110,7 +110,7 @@
         theProblem = femElasticityCreate(theGeometry, E, nu, rho, g, PLANAR_STRAIN);
  
         // Application des conditions aux limites
-        double Force = rho * g * theGeometry->height;
+        double Force = rho * g * theGeometry->height + 101325; // 101325 Pa = 1 atm
         femElasticityAddBoundaryCondition(theProblem,"Left",DIRICHLET_X,0.0);
         femElasticityAddBoundaryCondition(theProblem,"Right",DIRICHLET_X,0.0);
         femElasticityAddBoundaryCondition(theProblem,"Left",DIRICHLET_Y,0.0);
