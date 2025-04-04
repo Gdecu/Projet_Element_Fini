@@ -31,11 +31,11 @@ void run_interpolation()
     
     geoInitialize();
     femGeo* theGeometry = geoGetGeometry();
-    theGeometry->r_in = 2.0;
-    theGeometry->r_out = 2.5;
-    theGeometry->h = 0.1;
-    theGeometry->h_in = 0.5;
-    theGeometry->h_out = 0.05;
+    theGeometry->r_in = 50;
+    theGeometry->r_out = 62.5;
+    theGeometry->h = 2.5;
+    theGeometry->h_in = 12.5;
+    theGeometry->h_out = 1.25;
     theGeometry->height = 50;
     theGeometry->angle = M_PI/2;
    

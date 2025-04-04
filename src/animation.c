@@ -48,9 +48,9 @@
      // Initialisation géométrie
      
      femGeo *theGeometry = geoGetGeometry();
-     theGeometry->r_in = 2;
-     theGeometry->r_out = 2.5;
-     theGeometry->h = 0.1;
+     theGeometry->r_in = 50;
+     theGeometry->r_out = 62.5;
+     theGeometry->h = 2.5;
      theGeometry->height = 1;
      theGeometry->angle = M_PI / 2;
  
