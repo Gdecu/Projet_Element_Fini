@@ -21,13 +21,24 @@
      printf("    N : Next domain highlighted\n");
  
      // Tableau des hauteurs pour l'animation
-     double *heigts = malloc(6 * sizeof(double));
-     heigts[0] = 1;
-     heigts[1] = 10;
-     heigts[2] = 20;
-     heigts[3] = 30;
-     heigts[4] = 40;
-     heigts[5] = 50;
+    int numSteps = 16;
+    double *heigts = malloc(numSteps * sizeof(double));
+    heigts[0] = 1;
+    heigts[1] = 5;
+    heigts[2] = 10;
+    heigts[3] = 15;
+    heigts[4] = 20;
+    heigts[5] = 25;
+    heigts[6] = 30;
+    heigts[7] = 35;
+    heigts[8] = 40;
+    heigts[9] = 45;
+    heigts[10] = 50;
+    heigts[11] = 55;
+    heigts[12] = 60;
+    heigts[13] = 65;
+    heigts[14] = 70;
+    heigts[15] = 75;
  
      // Allocation initiale des pointeurs (déclarés ici pour usage global dans main)
      double *normDisplacement = NULL;
@@ -48,13 +59,13 @@
      double nu = 0.2;
      double rho = 2.3e3;
      double g = 9.81;
-     double deformationFactor = 1.5e2;
+     double deformationFactor = 1.5e3;
  
      
  
      // Variables d'animation
      int currentFrame = 0;
-     int numFrames = 6;
+     int numFrames = numSteps;
      double frameTime = 1.0;
      double tOld = glfwGetTime() - frameTime;
  
@@ -99,7 +110,7 @@
         theProblem = femElasticityCreate(theGeometry, E, nu, rho, g, PLANAR_STRAIN);
  
         // Application des conditions aux limites
-        double Force = rho * g * theGeometry->height * theGeometry->r_out * theGeometry->angle;
+        double Force = rho * g * theGeometry->height;
         femElasticityAddBoundaryCondition(theProblem,"Left",DIRICHLET_X,0.0);
         femElasticityAddBoundaryCondition(theProblem,"Right",DIRICHLET_X,0.0);
         femElasticityAddBoundaryCondition(theProblem,"Left",DIRICHLET_Y,0.0);
@@ -150,9 +161,6 @@
         free(normDisplacement); normDisplacement = NULL;
         free(forcesX);          forcesX = NULL;
         free(forcesY);          forcesY = NULL;
-
-        //free(theSoluce);
-        //free(theForces);
 
         femElasticityFree(theProblem);
         geoFinalize();

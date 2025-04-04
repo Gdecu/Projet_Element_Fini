@@ -14,7 +14,6 @@ double hermiteInterpolation(double d, double d_star, double h0, double h_star) {
 }
 
 double geoSize(double x, double y) {
-    //printf("geoSize called with x=%f, y=%f\n", x, y);
     femGeo* theGeometry = geoGetGeometry();
     if (theGeometry == NULL) {
         printf("geoSize: ERROR – geometry not initialized!\n");
@@ -24,7 +23,7 @@ double geoSize(double x, double y) {
     double h = theGeometry->h;
 
     if (flag == 0) {
-        // Interpolation pour le maillage
+        // on n'interpolle pas pour l'animation
         return h;
     }
 
@@ -43,9 +42,6 @@ double geoSize(double x, double y) {
     
     double dR_in = fabs(r - r_in);
     double dR_out = fabs(r_out - r);
-    //double dRight = fabs(r * sin(angle_max - angle));
-    //double dLeft = fabs(r * sin ( - angle_max + angle));
-
 
     // Taille interpolée autour de l'encoche et du trou
     double hIn = (dR_in < damWidth) ? hermiteInterpolation(dR_in, damWidth, h0, h) : h;
